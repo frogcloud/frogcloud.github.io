@@ -5,17 +5,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const socket = new WebSocket('wss://47f4-2-81-240-20.ngrok-free.app');
 
     socket.onopen = () => {
-      console.log('Client: Ok! | Server: Ok!');
+        console.log('Client: Ok! | Server: Ok!');
+        saveMessage(username, 'welcome to JustAFrog chat module', 'system');
+        socket.send(JSON.stringify({ username, message: 'user_joined' }));
+        loadMessages(); 
+        flushMessageQueue(); 
     };
 
     socket.onerror = (error) => {
-      console.log('Client: Ok! | Server: connection failed');
+        console.log('Client: Ok! | Server: connection failed');
     };
 
     socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
+        console.log('Message received:', event.data);
+        const data = JSON.parse(event.data);
+        const mention = `@${username}`;
+
+        if (data.command === '/clear') {
+            localStorage.removeItem('messages');
+            chatBox.innerHTML = '';
+        } else if (data.message === 'user_joined') {
+            const joinMessage = `${data.username} joined`;
+            chatBox.innerHTML += `<div><i>${joinMessage}</i></div>`;
+        } else {
+            const { username: sender, message } = data;
+            const isMention = message.includes(mention);
+
+            if (isMention) {
+                pingSound.pause();
+                pingSound.currentTime = 0;
+                pingSound.play();
+            }
+
+            const formattedMessage = formatMessage(sender, message, 'user', isMention);
+            chatBox.innerHTML += formattedMessage;
+            chatBox.scrollTop = chatBox.scrollHeight; 
+        }
+        saveMessage(data.username, data.message, 'user');
     };
-    
+
     let lastMessageTime = 0; 
     let messageQueue = []; 
 
@@ -33,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = generateUsername();
     console.log(`current username: ${username}`); 
 
-    // Carregar som de notificação
     const pingSound = new Audio('./sounds/ping.wav');
 
     function formatMessage(username, message, type, highlight = false) {
@@ -62,13 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (input) {
             const formattedMessage = formatMessage(username, input, 'user');
             saveMessage(username, input, 'user');
-            socket.send(JSON.stringify({ username, message: input })); 
+            socket.send(JSON.stringify({ username, message: input }));
             inputField.value = '';
             chatBox.scrollTop = chatBox.scrollHeight; 
         }
     }
 
-    // Enviar mensagens na fila
     function flushMessageQueue() {
         while (messageQueue.length > 0) {
             const message = messageQueue.shift();
@@ -103,49 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sendButton.addEventListener('click', send);
 
-    // Configurar envio com Enter
     inputField.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             send();
         }
     });
-
-
-    socket.addEventListener('open', () => {
-        flushMessageQueue();
-    });
-
-    // Receber mensagens do WebSocket
-    socket.addEventListener('message', (event) => {
-        const data = JSON.parse(event.data);
-        const mention = `@${username}`; 
-
-        if (data.command === '/clear') {
-            localStorage.removeItem('messages'); 
-            chatBox.innerHTML = ''; 
-        } else if (data.message === 'user_joined') {
-            const joinMessage = `${data.username} joined`;
-        } else {
-            const { username: sender, message } = data;
-
-            const isMention = message.includes(mention);
-
-            if (isMention) {
-                pingSound.pause();
-                pingSound.currentTime = 0; 
-                pingSound.play();
-
-                saveMessage(sender, message, 'user', true);
-            } else {
-                saveMessage(sender, message, 'user');
-            }
-        }
-        loadMessages();
-    });
-
-    socket.addEventListener('open', () => {
-        saveMessage(username, 'welcome to JustAFrog chat module', 'system');
-        socket.send(JSON.stringify({ username, message: 'user_joined' }));
-        loadMessages(); 
-    });
 });
+
