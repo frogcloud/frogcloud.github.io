@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const username = generateUsername();
-    console.log(`Seu nome de usuário é: ${username}`); 
+    console.log(`current username: ${username}`); 
 
     // Carregar som de notificação
     const pingSound = new Audio('./sounds/ping.wav');
