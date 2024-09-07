@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.addEventListener('open', () => {
-        saveMessage(username, 'Welcome to dhummys chat module', 'system');
+        saveMessage(username, 'welcome to JustAFrog chat module', 'system');
         socket.send(JSON.stringify({ username, message: 'user_joined' }));
         loadMessages(); 
     });
