@@ -4,6 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendButton = document.getElementById('send-button');
     const socket = new WebSocket('wss://47f4-2-81-240-20.ngrok-free.app');
 
+    socket.onopen = () => {
+      console.log('Client: Ok! | Server: Ok!');
+    };
+
+    socket.onerror = (error) => {
+      console.log('Client: Ok! | Server: connection failed');
+    };
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+    };
+    
     let lastMessageTime = 0; 
     let messageQueue = []; 
 
