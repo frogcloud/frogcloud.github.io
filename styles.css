@@ -1,0 +1,10 @@
+body{
+    margin: 120px;
+    text-align: center;
+    font-family: QuickSand;
+}
+
+@font-face {
+    font-family: QuickSand;
+    src: url(fonts/font-quicksand.ttf);
+}
