@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const socket = new WebSocket('ws://e801-2-81-240-20.ngrok-free.app');
+    const socket = new WebSocket('wss://e801-2-81-240-20.ngrok-free.app');
 
     let lastMessageTime = 0; 
     let messageQueue = []; 
