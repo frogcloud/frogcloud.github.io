@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+#chat-box {
+    flex: 1;
+    padding: 10px;
+    overflow-x: hidden;
+    max-width: 600px;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; 
+    word-break: break-word;
+    overflow-wrap: break-word; 
+}
+
+#input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+#input-field {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#send-button {
+    width: 80px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+@media (max-width: 600px) {
+    #input-field {
+        width: calc(100% - 60px);
+    }
+
+    #send-button {
+        width: 60px;
+    }
+}
+
+body.dark-mode {
+    background-color: #181818;
+    color: rgb(153, 153, 153);
+}
+
+body.dark-mode #chat-container {
+    background-color: #1f1f1f;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode #chat-header {
+    background-color: #333;
+}
+
+body.dark-mode #chat-box {
+    border-bottom: 1px solid #444;
+}
+
+body.dark-mode #input-container {
+    border-top: 1px solid #444;
+    background-color: #222;
+}
+
+body.dark-mode #input-field {
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode #send-button {
+    background-color: #555;
+}
