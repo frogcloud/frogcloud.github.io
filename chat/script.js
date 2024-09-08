@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const socket = new WebSocket('wss://669c-2-81-240-20.ngrok-free.app');
+    const socket = new WebSocket('wss://8f64-2-81-240-20.ngrok-free.app');
 
     socket.onopen = () => {
         console.log('Client: Ok! | Server: Ok!');
