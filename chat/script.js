@@ -2,14 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const socket = new WebSocket('wss://8f64-2-81-240-20.ngrok-free.app');
+    const socket = new WebSocket('wss://9ff8-2-81-240-20.ngrok-free.app');
+
+    const username = generateUsername();
+    console.log(`current username: ${username}`);
 
     socket.onopen = () => {
         console.log('Client: Ok! | Server: Ok!');
         saveMessage(username, 'welcome to JustAFrog chat module', 'system');
         socket.send(JSON.stringify({ username, message: 'user_joined' }));
-        loadMessages(); 
-        flushMessageQueue(); 
+        loadMessages();
+        flushMessageQueue();
     };
 
     socket.onerror = (error) => {
@@ -25,22 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.command === '/clear') {
             localStorage.removeItem('messages');
             chatBox.innerHTML = '';
-        } else if (data.message === 'user_joined') {
-            const joinMessage = `${data.username} joined`;
-            chatBox.innerHTML += `<div><i>${joinMessage}</i></div>`;
         } else {
             const { username: sender, message } = data;
             const isMention = message.includes(mention);
 
-            if (isMention) {
-                pingSound.pause();
-                pingSound.currentTime = 0;
-                pingSound.play();
-            }
+            if (data.message.startsWith('<i>') && data.message.endsWith('</i>')) {
+                chatBox.innerHTML += `<div>${message}</div>`;
+            } else {
+                if (isMention) {
+                    pingSound.pause();
+                    pingSound.currentTime = 0;
+                    pingSound.play();
+                }
 
-            const formattedMessage = formatMessage(sender, message, 'user', isMention);
-            chatBox.innerHTML += formattedMessage;
-            chatBox.scrollTop = chatBox.scrollHeight; 
+                const formattedMessage = formatMessage(sender, message, 'user', isMention);
+                chatBox.innerHTML += formattedMessage;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
         }
         saveMessage(data.username, data.message, 'user');
     };
@@ -59,16 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return username;
     }
 
-    const username = generateUsername();
-    console.log(`current username: ${username}`); 
-
     const pingSound = new Audio('./sounds/ping.wav');
 
     function formatMessage(username, message, type, highlight = false) {
-        const backgroundColor = highlight ? 'background-color: yellow;' : '';
-        return type === 'system'
-            ? `<i>${message}</i>`
-            : `<div style="${backgroundColor}"><strong>${username}:</strong> ${message}</div>`;
+        const backgroundColor = highlight ? 'background-color: white; color: red;' : '';
+        if (type === 'system') {
+            return `<i>${message}</i>`;
+        }
+        return `<div style="${backgroundColor}"><strong>${username}:</strong> ${message}</div>`;
     }
 
     function loadMessages() {
@@ -136,4 +138,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
