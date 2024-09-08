@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const socket = new WebSocket('wss://3e75-2-81-240-20.ngrok-free.app');
+    const socket = new WebSocket('wss://adb6-2-81-240-20.ngrok-free.app?ngrok-skip-browser-warning=true');
 
     const username = `User${Math.floor(Math.random() * 1000)}`;
     console.log(`current username: ${username}`);
