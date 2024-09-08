@@ -2,23 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const socket = new WebSocket('wss://--');
+    const socket = new WebSocket('wss://3e75-2-81-240-20.ngrok-free.app');
 
     const username = `User${Math.floor(Math.random() * 1000)}`;
     console.log(`current username: ${username}`);
 
     socket.onopen = () => {
-        //console.log('Client: Ok! | Server: Ok!');
-        //saveMessage(username, 'welcome to JustAFrog chat module', 'system');
-        //socket.send(JSON.stringify({ username, message: 'user_joined' }));
-        //loadMessages();
-        //flushMessageQueue();
+        console.log('Client: Ok! | Server: Ok!');
+        saveMessage(username, 'welcome to JustAFrog chat module', 'system');
+        socket.send(JSON.stringify({ username, message: 'user_joined' }));
+        loadMessages();
+        flushMessageQueue();
     };
 
     socket.onerror = (error) => {
-        //console.log('Client: Ok! | Server: not found');
-        //chatBox.textContent = '[client] error: cannot connect to server';
-        chatBox.textContent = 'This chat is currently closed';
+        console.log('Client: Ok! | Server: not found');
+        chatBox.textContent = '[client] error: cannot connect to server';
+        //chatBox.textContent = 'This chat is currently closed';
     };
 
     socket.onmessage = (event) => {
