@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const logElement = document.getElementById('log');
     const socket = new WebSocket('wss://82dc-2-81-240-20.ngrok-free.app');
 
     socket.onopen = () => {
@@ -15,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socket.onerror = (error) => {
         console.log('Client: Ok! | Server: connection failed');
-        logElement.textContent = '[client] error: cannot connect to server';
+        chatBox.textContent = '[client] error: cannot connect to server';
     };
 
     socket.onmessage = (event) => {
