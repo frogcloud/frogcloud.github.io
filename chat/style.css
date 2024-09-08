@@ -1,26 +1,49 @@
+@font-face {
+    font-family: QuickSand;
+    src: url('fonts/QuickSand.ttf') format('truetype');
+}
+
+
 body {
     font-family: QuickSand;
-    background: linear-gradient(to bottom right, #5e003d, #5c0000); /* Gradiente suave */
+    background: linear-gradient(to bottom right, #a3006a, #960000); /* Gradiente suave */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
 }
 
-@font-face {
-    font-family: QuickSand;
-    src: url(../fonts/font-quicksand.ttf);
+#movable {
+    background-image: url(icons/cloud.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    background-color:transparent;
+    position: absolute;
+    top: 200px;
+    left: 48%;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.3s cubic-bezier(1, 0, 0, 1), opacity 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    opacity: 1;
 }
-
 
 #chat-container {
+    font-family: QuickSand;
     width: 100%;
     max-width: 600px;
-    height: 80vh;
+    height: 20vh;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff2d;
+    background-color: #ffffff50;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.288);
     overflow: hidden;
@@ -50,6 +73,7 @@ body {
 }
 
 #input-field {
+    font-family: QuickSand;
     flex: 1;
     border: 1px solid transparent;
     padding: 10px;
@@ -58,6 +82,7 @@ body {
     outline: none;
     box-sizing: border-box;
     background-color: #470023;
+    color: white;
 }
 
 #input-field::placeholder {
@@ -69,6 +94,7 @@ body {
 }
 
 #send-button {
+    font-family: QuickSand;
     width: 80px;
     border: none;
     background-color: #741c48;
@@ -81,8 +107,6 @@ body {
     -webkit-user-drag: none;
     -moz-user-select: none;
 }
-
-
 
 @media (max-width: 600px) {
     #input-field {
