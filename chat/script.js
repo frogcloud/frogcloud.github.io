@@ -2,23 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatBox = document.getElementById('chat-box');
     const inputField = document.getElementById('input-field');
     const sendButton = document.getElementById('send-button');
-    const socket = new WebSocket('wss://f599-144-64-34-225.ngrok-free.app');
+    const socket = new WebSocket('wss://--');
 
-    const username = generateUsername();
+    const username = `User${Math.floor(Math.random() * 1000)}`;
     console.log(`current username: ${username}`);
 
     socket.onopen = () => {
-        console.log('Client: Ok! | Server: Ok!');
-        saveMessage(username, 'welcome to JustAFrog chat module', 'system');
-        socket.send(JSON.stringify({ username, message: 'user_joined' }));
-        loadMessages();
-        flushMessageQueue();
+        //console.log('Client: Ok! | Server: Ok!');
+        //saveMessage(username, 'welcome to JustAFrog chat module', 'system');
+        //socket.send(JSON.stringify({ username, message: 'user_joined' }));
+        //loadMessages();
+        //flushMessageQueue();
     };
 
     socket.onerror = (error) => {
-        console.log('Client: Ok! | Server: not found');
-        chatBox.textContent = '[client] error: cannot connect to server';
-        //chatBox.textContent = 'This chat is currently closed';
+        //console.log('Client: Ok! | Server: not found');
+        //chatBox.textContent = '[client] error: cannot connect to server';
+        chatBox.textContent = 'This chat is currently closed';
     };
 
     socket.onmessage = (event) => {
@@ -66,13 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pingSound = new Audio('./sounds/ping.wav');
 
-    function formatMessage(username, message, type, highlight = false) {
-        const backgroundColor = highlight ? 'background-color: white; color: red;' : '';
+    function formatMessage(username, message, type) {
         if (type === 'system') {
-            return `<i>${message}</i>`;
+          return `<div><i>${username} joined the chat</i></div>`;
         }
-        return `<div style="${backgroundColor}"><strong>${username}:</strong> ${message}</div>`;
-    }
+        return `<div><strong>${username}:</strong> ${message}</div>`;
+      }
 
     function loadMessages() {
         const messages = JSON.parse(localStorage.getItem('messages')) || [];
