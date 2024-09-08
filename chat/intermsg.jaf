@@ -1,0 +1,10 @@
+require = sand / civil
+
+sand.newFunction(drawWelcomeMsgPt){
+sand.get(Chat){
+  sand.draw(message){
+    new.msg[content: "Olá pessoa que estiver neste chat, irei-lhe passar algumas informações: este chat foi criado pela @dhummy, este chat tem só está acessível em certos navegadores e o mais importante: \p divirtam-se e convidem amigos!", type: system *default]
+  }
+}
+
+civil.execute(drawWelcomeMsgPt)
