@@ -1,0 +1,119 @@
+@font-face {
+    font-family: QuickSand;
+    src: url('fonts/QuickSand.ttf') format('truetype');
+}
+
+
+body {
+    font-family: QuickSand;
+    background: linear-gradient(to bottom right, #a3006a, #960000); /* Gradiente suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
+#movable {
+    background-image: url(icons/cloud.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    background-color:transparent;
+    position: absolute;
+    top: 200px;
+    left: 48%;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.3s cubic-bezier(1, 0, 0, 1), opacity 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    opacity: 1;
+}
+
+#chat-container {
+    font-family: QuickSand;
+    width: 100%;
+    max-width: 600px;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff50;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.288);
+    overflow: hidden;
+}
+
+#chat-header {
+    background-color: #ffffff00;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+#chat-box {
+    flex: 1;
+    padding: 10px;
+    overflow-x: hidden;
+    max-width: 600px;
+    word-wrap: break-word; 
+    word-break: break-word;
+    overflow-wrap: break-word; 
+}
+
+#input-container {
+    display: flex;
+    background-color: transparent;
+   
+}
+
+#input-field {
+    font-family: QuickSand;
+    flex: 1;
+    border: 1px solid transparent;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 0;
+    outline: none;
+    box-sizing: border-box;
+    background-color: #470023;
+    color: white;
+}
+
+#input-field::placeholder {
+    color: rgb(192, 192, 192);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+}
+
+#send-button {
+    font-family: QuickSand;
+    width: 80px;
+    border: none;
+    background-color: #741c48;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+}
+
+@media (max-width: 600px) {
+    #input-field {
+        width: calc(100% - 60px);
+    }
+
+    #send-button {
+        width: 60px;
+    }
+}
