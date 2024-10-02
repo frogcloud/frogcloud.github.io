@@ -2,9 +2,18 @@ body{
     margin: 120px;
     text-align: center;
     font-family: QuickSand;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
 }
 
 @font-face {
     font-family: QuickSand;
     src: url(fonts/font-quicksand.ttf);
 }
+
+a{
+    color: rgb(255, 0, 98);
+}
+

@@ -1,6 +1,6 @@
 @font-face {
     font-family: QuickSand;
-    src: url('fonts/QuickSand.ttf') format('truetype');
+    src: url('../fonts/QuickSand.ttf') format('truetype');
 }
 
 
@@ -20,7 +20,7 @@ body {
 }
 
 #movable {
-    background-image: url(icons/cloud.png);
+    background-image: url(../icons/cloud.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
